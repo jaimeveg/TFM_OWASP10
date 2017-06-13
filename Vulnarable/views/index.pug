@@ -13,8 +13,8 @@ html
 			.w3-container.w3-indigo.w3-padding
 				.w3-bar.w3-indigo
 					a.w3-bar-item.w3-button.w3-hover-indigo(href="#" style="font-weight: bold;font-family:'Homemade Apple',cursive;font-size:18px") Airtravel
-					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#") Sign in
-					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#") Sign up
+					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#" onclick="document.getElementById('signIn').style.display='block'") Sign in
+					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#" onclick="document.getElementById('signUp').style.display='block'") Sign up
 					
 					
 		.w3-container(style="height:630px")
@@ -23,9 +23,35 @@ html
 						source(src="https://17315-presscdn-0-68-pagely.netdna-ssl.com/wp-content/uploads/2016/08/listify-rental-video-bg-compressed.mp4", type="video/mp4")
 				.overlay.fullscreen-bg-overlay
 				.w3-panel.w3-padding-64(style="margin-top:100px")
-					.form
-						h1= title
-						p Welcome to #{title}
+					form.form(action="/search" method="post")
+						table.w3-table
+							h2.w3-center.w3-text-indigo(style="font-weight:bold") Fill your trip info
+							tr
+								td
+									i.fa.fa-calendar.w3-left
+									label.w3-left(style="margin-left:5px") From:
+									input.w3-input.w3-border.w3-round(id="startDate" type="date")
+								td
+									i.fa.fa-calendar.w3-left
+									label.w3-left(style="margin-left:5px") To:
+									input.w3-input.w3-border.w3-round(id="finishDate" type="date")
+							tr
+								td
+									i.fa.fa-building.w3-left 
+									label.w3-left(style="margin-left:5px") In:
+									input.w3-input.w3-border.w3-round(id="city" type="text")
+								td
+									i.fa.fa-users.w3-left
+									label.w3-left(style="margin-left:5px") For:
+									select.w3-select.w3-border.w3-round(id="numberOfPeople" type="text")
+										option(value="1") 1 person
+										option(value="2") 2 people
+										option(value="3") 3 people
+										option(value="4") 4 people
+										option(value="5") 5 people
+										option(value="6") 6 people
+										option(value="6+") 6+ people
+						button.w3-button.w3-blue.w3-center(type="submit") Check for apartaments!
 		
 	
 		p
@@ -51,43 +77,77 @@ html
 		.w3-row-padding.w3-border-top
 			h2.w3-center.w3-opacity(style="font-weight: bold;") Featured destinations
 			.w3-col.s3
-				.w3-panel.w3-hover-shadow
+				.w3-panel.w3-hover-shadow.w3-padding
 					a(href="##")
 						img(src="/images/chicago.jpg" style="max-width: 100%; height: 200px;")
 					h3.w3-center Chicago
 			.w3-col.s3
-				.w3-panel.w3-hover-shadow
+				.w3-panel.w3-hover-shadow.w3-padding
 					a(href="##")
 						img(src="/images/madrid.jpg" style="max-width: 100%; height: 200px;")
 					h3.w3-center Madrid
 			.w3-col.s3
-				.w3-panel.w3-hover-shadow
+				.w3-panel.w3-hover-shadow.w3-padding
 					a(href="##")
 						img(src="/images/new_york.jpg" style="max-width: 100%; height: 200px;")
 					h3.w3-center New York
 			.w3-col.s3
-				.w3-panel.w3-hover-shadow
+				.w3-panel.w3-hover-shadow.w3-padding
 					a(href="##")
 						img(src="/images/venice.jpg" style="max-width: 100%; height: 200px;")
 					h3.w3-center Venice
 		.w3-row-padding
 			.w3-col.s3
-				.w3-panel.w3-hover-shadow
+				.w3-panel.w3-hover-shadow.w3-padding
 					a(href="##")
 						img(src="/images/LA.jpg" style="max-width: 100%; height: 200px;")
 					h3.w3-center Los Angeles
 			.w3-col.s3
-				.w3-panel.w3-hover-shadow
+				.w3-panel.w3-hover-shadow.w3-padding
 					a(href="##")
 						img(src="/images/miami.jpg" style="max-width: 100%; height: 200px;")
 					h3.w3-center Miami
 			.w3-col.s3
-				.w3-panel.w3-hover-shadow
+				.w3-panel.w3-hover-shadow.w3-padding
 					a(href="##")
 						img(src="/images/rome.jpg" style="max-width: 100%; height: 200px;")
 					h3.w3-center Rome
 			.w3-col.s3
-				.w3-panel.w3-hover-shadow
+				.w3-panel.w3-hover-shadow.w3-padding
 					a(href="##")
 						img(src="/images/la_habana.jpg" style="max-width: 100%; height: 200px;")
 					h3.w3-center La Habana
+					
+		// Sign In / Up Modals
+		
+		div.w3-modal(id="signIn")
+			.w3-modal-content.w3-card.w3-round(style="width:50%")
+				header.w3-container.w3-indigo.w3-round
+					span.w3-button.w3-display-topright(onclick="document.getElementById('signIn').style.display='none'") &times;
+					h3 Sign In
+				w3-container(style="width:100%")
+					form.form(action="/signin" method="post")
+						label.w3-left(style="margin-left:5px") Username:
+						input.w3-input.w3-border.w3-round(id="user" type="text")
+						label.w3-left(style="margin-left:5px") Password:
+						input.w3-input.w3-border.w3-round(id="pass" type="password")
+						button.w3-button.w3-blue.w3-center(type="submit") Sign In
+						
+		div.w3-modal(id="signUp")
+			.w3-modal-content.w3-card.w3-round(style="width:50%")
+				header.w3-container.w3-indigo.w3-round
+					span.w3-button.w3-display-topright(onclick="document.getElementById('signUp').style.display='none';") &times;
+					h3 Sign Up
+				w3-container(style="width:100%")
+					form.form(action="/newuser" method="post")
+						label.w3-left(style="margin-left:5px") Name:
+						input.w3-input.w3-border.w3-round(id="name" type="text")
+						label.w3-left(style="margin-left:5px") Last Name:
+						input.w3-input.w3-border.w3-round(id="last" type="text")
+						label.w3-left(style="margin-left:5px") Email:
+						input.w3-input.w3-border.w3-round(id="email" type="email")
+						label.w3-left(style="margin-left:5px") Username:
+						input.w3-input.w3-border.w3-round(id="newuser" type="text")
+						label.w3-left(style="margin-left:5px") Password:
+						input.w3-input.w3-border.w3-round(id="newpass" type="password")
+						button.w3-button.w3-blue.w3-center(type="submit") New user

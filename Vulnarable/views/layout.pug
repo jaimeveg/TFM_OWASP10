@@ -7,21 +7,5 @@ html
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		script(type='text/javascript', src='/js/bootstrap.min.js')
 	body
-		.fullscreen-bg
-			video.fullscreen-bg__video(loop, muted, autoplay)
-				source(src="https://17315-presscdn-0-68-pagely.netdna-ssl.com/wp-content/uploads/2016/08/listify-rental-video-bg-compressed.mp4", type="video/mp4")
-		.overlay.fullscreen-bg-overlay
-		.info
-			h1 MYAPP
-		.container
-			.tab
-				ul
-					li
-						a(href='/') Home
-					li
-						a(href='/books') Search Book
-					li
-						a(href='/signOut') Sign Out
-		.form
-			h1= title
-			p Welcome to #{title}
+		
+		block content
