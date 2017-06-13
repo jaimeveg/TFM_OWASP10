@@ -1,5 +1,93 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html
+	head
+		title= 'AirTravel'
+		link(rel='stylesheet', href='/stylesheets/index.css')
+		script(type='text/javascript', src='https://code.jquery.com/jquery-1.9.1.js')
+		link(rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css")
+		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+		link(href='https://fonts.googleapis.com/css?family=Homemade+Apple' rel='stylesheet')
+	body
+		
+		.w3-top
+			.w3-container.w3-indigo.w3-padding
+				.w3-bar.w3-indigo
+					a.w3-bar-item.w3-button.w3-hover-indigo(href="#" style="font-weight: bold;font-family:'Homemade Apple',cursive;font-size:18px") Airtravel
+					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#") Sign in
+					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#") Sign up
+					
+					
+		.w3-container(style="height:630px")
+				.fullscreen-bg
+					video.fullscreen-bg__video(loop, muted, autoplay)
+						source(src="https://17315-presscdn-0-68-pagely.netdna-ssl.com/wp-content/uploads/2016/08/listify-rental-video-bg-compressed.mp4", type="video/mp4")
+				.overlay.fullscreen-bg-overlay
+				.w3-panel.w3-padding-64(style="margin-top:100px")
+					.form
+						h1= title
+						p Welcome to #{title}
+		
+	
+		p
+		.w3-row-padding.w3-border-top
+			p 
+			.w3-col.s4.w3-center.w3-margins
+				.w3-panel.w3-topbar.w3-bottombar.w3-leftbar.w3-rightbar.w3-border-blue
+					p.w3-jumbo
+						i.fa.fa-plane
+					h3 Pick your destination
+			.w3-col.s4.w3-center.w3-margins
+				.w3-panel.w3-topbar.w3-bottombar.w3-leftbar.w3-rightbar.w3-border-blue
+					p.w3-jumbo
+						i.fa.fa-calendar
+					h3 Pick the dates
+			.w3-col.s4.w3-center.w3-margins
+				.w3-panel.w3-topbar.w3-bottombar.w3-leftbar.w3-rightbar.w3-border-blue
+					p.w3-jumbo
+						i.fa.fa-home
+					h3 Pick your house!
+		
+		p
+		.w3-row-padding.w3-border-top
+			h2.w3-center.w3-opacity(style="font-weight: bold;") Featured destinations
+			.w3-col.s3
+				.w3-panel.w3-hover-shadow
+					a(href="##")
+						img(src="/images/chicago.jpg" style="max-width: 100%; height: 200px;")
+					h3.w3-center Chicago
+			.w3-col.s3
+				.w3-panel.w3-hover-shadow
+					a(href="##")
+						img(src="/images/madrid.jpg" style="max-width: 100%; height: 200px;")
+					h3.w3-center Madrid
+			.w3-col.s3
+				.w3-panel.w3-hover-shadow
+					a(href="##")
+						img(src="/images/new_york.jpg" style="max-width: 100%; height: 200px;")
+					h3.w3-center New York
+			.w3-col.s3
+				.w3-panel.w3-hover-shadow
+					a(href="##")
+						img(src="/images/venice.jpg" style="max-width: 100%; height: 200px;")
+					h3.w3-center Venice
+		.w3-row-padding
+			.w3-col.s3
+				.w3-panel.w3-hover-shadow
+					a(href="##")
+						img(src="/images/LA.jpg" style="max-width: 100%; height: 200px;")
+					h3.w3-center Los Angeles
+			.w3-col.s3
+				.w3-panel.w3-hover-shadow
+					a(href="##")
+						img(src="/images/miami.jpg" style="max-width: 100%; height: 200px;")
+					h3.w3-center Miami
+			.w3-col.s3
+				.w3-panel.w3-hover-shadow
+					a(href="##")
+						img(src="/images/rome.jpg" style="max-width: 100%; height: 200px;")
+					h3.w3-center Rome
+			.w3-col.s3
+				.w3-panel.w3-hover-shadow
+					a(href="##")
+						img(src="/images/la_habana.jpg" style="max-width: 100%; height: 200px;")
+					h3.w3-center La Habana
