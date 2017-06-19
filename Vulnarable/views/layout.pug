@@ -2,10 +2,54 @@ doctype html
 html
 	head
 		title= 'AirTravel'
-		link(rel='stylesheet', href='/stylesheets/auth.css')
+		link(rel='stylesheet', href='/stylesheets/index.css')
 		script(type='text/javascript', src='https://code.jquery.com/jquery-1.9.1.js')
-		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-		script(type='text/javascript', src='/js/bootstrap.min.js')
+		link(rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css")
+		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+		link(href='https://fonts.googleapis.com/css?family=Homemade+Apple' rel='stylesheet')
+		
 	body
+	
+		
+		.w3-top
+			.w3-container.w3-indigo.w3-padding
+				.w3-bar.w3-indigo
+					a.w3-bar-item.w3-button.w3-hover-indigo(href="/" style="font-weight: bold;font-family:'Homemade Apple',cursive;font-size:18px") Airtravel
+					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#" onclick="document.getElementById('signIn').style.display='block'") Sign in
+					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#" onclick="document.getElementById('signUp').style.display='block'") Sign up
+					
+		// Sign In / Up Modals
+		
+		div.w3-modal(id="signIn")
+			.w3-modal-content.w3-card.w3-round(style="width:50%")
+				header.w3-container.w3-indigo.w3-round
+					span.w3-button.w3-display-topright.w3-round(onclick="document.getElementById('signIn').style.display='none'") &times;
+					h3 Sign In
+				w3-container(style="width:100%")
+					form.form(action="/signin" method="post")
+						label.w3-left(style="margin-left:5px") Username:
+						input.w3-input.w3-border.w3-round(id="user" type="text" name="user[username]")
+						label.w3-left(style="margin-left:5px") Password:
+						input.w3-input.w3-border.w3-round(id="pass" type="password" name="user[password]")
+						button.w3-button.w3-blue.w3-center(type="submit") Sign In
+						
+		div.w3-modal(id="signUp")
+			.w3-modal-content.w3-card.w3-round(style="width:50%")
+				header.w3-container.w3-indigo.w3-round
+					span.w3-button.w3-display-topright.w3-round(onclick="document.getElementById('signUp').style.display='none';") &times;
+					h3 Sign Up
+				w3-container(style="width:100%")
+					form.form(action="/signup" method="post")
+						label.w3-left(style="margin-left:5px") Name:
+						input.w3-input.w3-border.w3-round(id="name" type="text" name="user[name]")
+						label.w3-left(style="margin-left:5px") Last Name:
+						input.w3-input.w3-border.w3-round(id="last" type="text" name="user[lastname]")
+						label.w3-left(style="margin-left:5px") Email:
+						input.w3-input.w3-border.w3-round(id="email" type="email" name="user[email]")
+						label.w3-left(style="margin-left:5px") Username:
+						input.w3-input.w3-border.w3-round(id="newuser" type="text" name="user[username]")
+						label.w3-left(style="margin-left:5px") Password:
+						input.w3-input.w3-border.w3-round(id="newpass" type="password" name="user[password]")
+						button.w3-button.w3-blue.w3-center(type="submit") New user
 		
 		block content

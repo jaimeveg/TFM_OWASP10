@@ -1,0 +1,21 @@
+extends layout
+
+block content
+
+	.w3-container.w3-indigo.w3-padding
+				.w3-bar.w3-indigo
+					a.w3-bar-item.w3-button.w3-hover-indigo(href="/" style="font-weight: bold;font-family:'Homemade Apple',cursive;font-size:18px") Airtravel
+					
+	.w3-container.w3-red.w3-margin
+		.w3-container.w3-green.w3-margin
+			p #{user.Name}
+			p #{user.Lastname}
+			p #{user.Email}
+			p #{user.Password}
+			p #{user.Username}
+			p #{user.id}
+			p Hola
+	
+	//Reviews (Only for registered users)
+	
+	//Write review (Not shown to same user)
