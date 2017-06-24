@@ -3,12 +3,11 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 var sqlite = require('sqlite3');
-var session = require('express-session');
-
-var index = require('./routes/index');
-
+var connect = require('connect');
+var routes = require('./routes/index');
 var app = express();
 
 // view engine setup
@@ -20,28 +19,28 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser('vulnerable'));
-app.use(session());
+app.use(cookieParser());
+app.use(session({secret: 'vulnerable', 
+                 saveUninitialized: true,
+                 resave: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 
 //app.use(sessionController.timeout);
 // Helper dinamico:
 app.use(function(req, res, next) {
-
+	
    // Hacer visible req.session en las vistas
    res.locals.session = req.session;
 
    next();
 });
 
-//Initalize DB
-var db = new sqlite.Database(path.join(__dirname, 'public', 'data', 'app.db'));
-db.run("PRAGMA foreign_keys = ON;");
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+	console.log("HOLA3");
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -57,5 +56,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 module.exports = app;

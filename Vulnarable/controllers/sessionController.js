@@ -12,7 +12,7 @@ exports.loginRequired = function (req, res, next) {
     if (req.session.user) {
         next();
     } else {
-        res.redirect('/login?redir=' + (req.param('redir') || req.url));
+        res.redirect('/');
     }
 };
 
@@ -71,7 +71,7 @@ exports.create = function(req, res) {
         // IMPORTANTE: creo req.session.user.
         // Solo guardo algunos campos del usuario en la sesion.
         // Esto es lo que uso para saber si he hecho login o no.
-        req.session.user = {id:user.id, username:user.username, name:user.name, hour:hour};
+        req.session.user = {id:user.id, username:user.Username, name:user.Name, hour:hour};
 	console.log("He creado un usuario en %d",req.session.user.hour);
 
         // Vuelvo al url indicado en redir
@@ -87,8 +87,8 @@ exports.create = function(req, res) {
 exports.destroy = function(req, res) {
 
     delete req.session.user;
-    req.flash('success', 'Logout.');
-    res.redirect("/login");     
+    console.log('Logout.');
+    res.redirect("/");     
 };
 
 // TIMEOUT

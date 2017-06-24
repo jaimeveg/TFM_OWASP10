@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+	.w3-container.w3-indigo.w3-padding
+				.w3-bar.w3-indigo
+					a.w3-bar-item.w3-button.w3-hover-indigo(href="/" style="font-weight: bold;font-family:'Homemade Apple',cursive;font-size:18px") Airtravel
+					
+	.w3-container.w3-margin
+		.w3-panel.w3-border-blue.w3-margin
+			p #{house.City}
+			p #{house.Address}
+			p #{house.Description}
+			p #{house.MaxPeople}
+			p #{house.Rating}
+			p #{house.Owner}
+			if session.user
+				if session.user.id == house.Owner
+					//-var editUserPath = '/users/edit/'+user.id;
+					//a.w3-button.w3-blue.w3-hover-indigo.w3-center.w3-round(href=editUserPath) Edit User
+					a.w3-button.w3-blue.w3-hover-indigo.w3-center.w3-round(href="/") Modify House
+	
+	//Reviews (Only for registered users)
+	
+	//Write review (Not shown to same user)

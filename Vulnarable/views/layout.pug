@@ -15,9 +15,13 @@ html
 			.w3-container.w3-indigo.w3-padding
 				.w3-bar.w3-indigo
 					a.w3-bar-item.w3-button.w3-hover-indigo(href="/" style="font-weight: bold;font-family:'Homemade Apple',cursive;font-size:18px") Airtravel
-					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#" onclick="document.getElementById('signIn').style.display='block'") Sign in
-					a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#" onclick="document.getElementById('signUp').style.display='block'") Sign up
-					
+					if session.user == null
+						a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#" onclick="document.getElementById('signIn').style.display='block'") Sign in
+						a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="#" onclick="document.getElementById('signUp').style.display='block'") Sign up
+					else
+						a.w3-bar-item.w3-right.w3-hover-blue.w3-button(href="/logout") Logout
+						-var editUsernamePath = '/users/'+session.user.username;
+						a.w3-bar-item.w3-right(href=editUsernamePath style="text-decoration: none") #{session.user.username}
 		// Sign In / Up Modals
 		
 		div.w3-modal(id="signIn")

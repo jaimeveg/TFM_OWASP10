@@ -1,0 +1,54 @@
+extends layout
+
+block content
+
+	-var editUserPath = '/users/edit/'+user.id;
+	.w3-container.w3-indigo.w3-padding
+				.w3-bar.w3-indigo
+					a.w3-bar-item.w3-button.w3-hover-indigo(href="/" style="font-weight: bold;font-family:'Homemade Apple',cursive;font-size:18px") Airtravel
+					
+	.w3-container.w3-margin
+		.w3-panel.w3-border-blue.w3-margin
+			w3-container(style="width:100%")
+				form.form(action=editUserPath method="post")
+					label.w3-left(style="margin-left:5px") Name:
+					input.w3-input.w3-border.w3-round(id="name" type="text" name="user[name]" value=user.Name)
+					label.w3-left(style="margin-left:5px") Lastname:
+					input.w3-input.w3-border.w3-round(id="lastname" type="text" name="user[lastname]" value=user.LastName)
+					label.w3-left(style="margin-left:5px") Email:
+					input.w3-input.w3-border.w3-round(id="email" type="text" name="user[email]" value=user.Email)
+					input(type="hidden" name="type" value="info")
+					if session.user.id == user.id
+						button.w3-button.w3-blue.w3-hover-indigo.w3-center.w3-round(type="submit") Save
+				button.w3-button.w3-blue.w3-hover-indigo.w3-center.w3-round(onclick="document.getElementById('changePass').style.display='block'") Change Password
+				button.w3-button.w3-blue.w3-hover-indigo.w3-center.w3-round(onclick="document.getElementById('payment').style.display='block'") Edit Payment Info
+							
+	//Change password Modal	
+	div.w3-modal(id="changePass")
+			.w3-modal-content.w3-card.w3-round(style="width:50%")
+				header.w3-container.w3-indigo.w3-round
+					span.w3-button.w3-display-topright.w3-round(onclick="document.getElementById('changePass').style.display='none'") &times;
+					h3 Password
+				w3-container(style="width:100%")
+					form.form(action=editUserPath method="post")
+						label.w3-left(style="margin-left:5px") Current Password:
+						input.w3-input.w3-border.w3-round(id="user" type="text" name="user[oldpassword]")
+						label.w3-left(style="margin-left:5px") New Password:
+						input.w3-input.w3-border.w3-round(id="pass" type="password" name="user[password]")
+						input(type="hidden" name="type" value="password")
+						if session.user.id == user.id
+							button.w3-button.w3-blue.w3-center(type="submit") Change Password
+	
+	//Payment Info Modal
+	div.w3-modal(id="payment")
+			.w3-modal-content.w3-card.w3-round(style="width:50%")
+				header.w3-container.w3-indigo.w3-round
+					span.w3-button.w3-display-topright.w3-round(onclick="document.getElementById('payment').style.display='none'") &times;
+					h3 Payment Info
+				w3-container(style="width:100%")
+					form.form(action=editUserPath method="post")
+						label.w3-left(style="margin-left:5px") Credit Card:
+						input.w3-input.w3-border.w3-round(id="user" type="text" name="user[cardNum]")
+						input(type="hidden" name="type" value="payment")
+						if session.user.id == user.id
+							button.w3-button.w3-blue.w3-center(type="submit") Save payment

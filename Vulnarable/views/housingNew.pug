@@ -1,0 +1,24 @@
+extends layout
+
+block content
+
+	-var userPath = '/users/'+session.user.username;
+	.w3-container.w3-indigo.w3-padding
+				.w3-bar.w3-indigo
+					a.w3-bar-item.w3-button.w3-hover-indigo(href="/" style="font-weight: bold;font-family:'Homemade Apple',cursive;font-size:18px") Airtravel
+					
+	.w3-container.w3-margin
+		.w3-panel.w3-border-blue.w3-margin
+			w3-container(style="width:100%")
+				form.form(action='/housing/create' method="post")
+					label.w3-left(style="margin-left:5px") City:
+					input.w3-input.w3-border.w3-round(id="city" type="text" name="house[city]")
+					label.w3-left(style="margin-left:5px") Address:
+					input.w3-input.w3-border.w3-round(id="address" type="text" name="house[address]")
+					label.w3-left(style="margin-left:5px") Max people:
+					input.w3-input.w3-border.w3-round(id="email" type="text" name="house[people]")
+					label.w3-left(style="margin-left:5px") Description:
+					input.w3-input.w3-border.w3-round(id="email" type="text" name="house[description]")
+					input(type="hidden" name="type" value="info")
+					button.w3-button.w3-blue.w3-hover-indigo.w3-center.w3-round(type="submit") Save
+

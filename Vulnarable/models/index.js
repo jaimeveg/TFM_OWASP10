@@ -40,7 +40,7 @@ User.hasMany(UserReview);
 // 
 // Con el uso de la opcion "as" la relacion se llama Author, y los metodos
 // de acceso creados son setAuthor y getAuthor. 
-Housing.belongsTo(User, {as: 'Landlord', foreignKey: 'UserId'});
+Housing.belongsTo(User, {as: 'Owner', foreignKey: 'UserId'});
 
 UserReview.belongsTo(User, {as: 'Author', foreignKey: 'AuthorId'});
 HousingReview.belongsTo(User, {as: 'Author', foreignKey: 'AuthorId'});
@@ -50,6 +50,9 @@ UserReview.belongsTo(User);
 
 // Exportar los modelos:
 exports.User = User;
+exports.Housing = Housing;
+exports.UserReview = UserReview;
+exports.HousingReview = HousingReview;
 
 // Crear las tablas en la base de datos que no se hayan creado aun.
 // En un futuro lo haremos con migraciones.

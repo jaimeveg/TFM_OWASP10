@@ -5,120 +5,70 @@ var models = require('../models');
 var db = new sqlite.Database(path.join(__dirname, '..', 'public', 'data', 'app.db'));
 
 /*
-*  Autoloading :username
+*  Autoloading :houseid
 */
-exports.loadUsername = function(req, res, next, username) {
-   models.User
-        .find({where: {username: username}})
-        .then(function(user) {
-            if (user) {
-                req.user = user;
+exports.loadHouseId = function(req, res, next, houseid) {
+   models.Housing
+        .find({where: {id: houseid}})
+        .then(function(house) {
+            if (house) {
+                req.house = house;
                 next();
             } else {
-                console.log('No existe el usuario con username='+username+'.');
-                next('No existe el usuario con username='+username+'.');
+                console.log('No existe el housing con id='+id+'.');
+                next('No existe el housing con id='+id+'.');
             }
         })
         .error(function(error) {
             next(error);
         });
-};
-
-exports.loadUserId = function(req, res, next, userid) {
-   models.User
-        .find({where: {id: userid}})
-        .then(function(user) {
-            if (user) {
-                req.user = user;
-                next();
-            } else {
-                console.log('No existe el usuario con id='+id+'.');
-                next('No existe el usuario con id='+id+'.');
-            }
-        })
-        .error(function(error) {
-            next(error);
-        });
-};
-
-/*
-* Comprueba que el usuario logeado es el usuario alque se refiere esta ruta.
-*/
-exports.loggedUserIsUser = function(req, res, next) {
-    
-   if (req.session.user && req.session.user.id == req.user.id) {
-      next();
-   } else {
-      console.log('Ruta prohibida: no soy el usuario logeado.');
-      res.send(403);
-   }
 };
 
 
 //Create method: New User
-// POST /signUp
+// POST /housing/create
 exports.create = function(req, res, next) {
 
-    var name = req.body.user.name;
-    var lastname = req.body.user.lastname;
-    var email = req.body.user.email;
-	var username = req.body.user.username;
-	var pass = req.body.user.password;
+    var city = req.body.house.city;
+    var address = req.body.house.address;
+	//Este eval lo quitaremos y pondremos uno al meter el rating en las reviews
+    var maxPeople = eval(req.body.house.people);
+	var description = req.body.house.description;
+	var owner = req.session.user.id;
 	
-	var user = models.User.build(
-        { Username: username,
-          Name:  name,
-          LastName: lastname,
-		  Email: email
+	var house = models.Housing.build(
+        { City: city,
+          Address:  address,
+          MaxPeople: maxPeople,
+		  Description: description,
+		  Owner: owner,
+		  Rating: 0
         });
-    
-    // Username must be unique
-    models.User.find({where: {username: username}})
-        .then(existing_user => {
-            if (existing_user) {
-                console.log("Error: User \""+ username +"\" already exists: "+existing_user.values);
-				res.redirect('/');				
-            } else {
-                
-                // Password cannot be empty
-                if (!pass) {
-					console.log("Password should have a value");
-					res.redirect('/');
-                }
-
-                //user.Salt = createNewSalt();
-                user.Password = pass;
-				user.Rating = 0;
-
-                user.save()
-                    .then(function() {
-						console.log('User succesfully created');
-                        res.redirect('/');
-                    })
-                    .error(function(error) {
-                        next(error);
-                    });
-            }
-        })
-        .error(function(error) {
+	
+	house.save()
+         .then(function() {
+			console.log('User succesfully created');
+            res.redirect('/users/'+req.session.user.username);
+         })
+         .error(function(error) {
             next(error);
-        });
+         });
 	
 };
 
-// GET /users/username
+// GET /housing/new
+//Show User information
+exports.new = function(req, res, next) {
+    res.render('housingNew');
+};
+
+// GET /housing/houseid
 //Show User information
 exports.show = function(req, res, next) {
-	console.log("Showing user: "+ req.user.Name);
-    res.render('userInfo', {user: req.user});
+	console.log("Showing user: "+ req.house.Address);
+    res.render('housingInfo', {house: req.house});
 };
 
-// GET /users/edit/userid
-exports.edit = function(req, res, next) {
-
-    res.render('userEdit', {user: req.user,
-                              validate_errors: {} });
-};
 
 //POST /users/edit/:userid
 exports.update = function(req, res, next) {
@@ -173,7 +123,7 @@ exports.update = function(req, res, next) {
  *
  * Busca el usuario con el login dado en la base de datos y comprueba su password.
  * Si todo es correcto ejecuta callback(null,user).
- * Si la autenticación falla o hay errores se ejecuta callback(error).
+ * Si la autenticaciÃ³n falla o hay errores se ejecuta callback(error).
  */
 exports.autenticar = function(username, password, callback) {
     
